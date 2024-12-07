@@ -33,6 +33,7 @@ pipeline {
             agent {
                 docker {
                     image 'amazon/aws-cli'
+                    reuseNode true
                     args "--entrypoint=''"
                 }
             }
@@ -148,7 +149,7 @@ pipeline {
                 sh '''
                     node --version
                     netlify --version
-                    echo "Depolying to production. Site ID: $NETLIFY_SITE_ID"
+                    echo "Deploying to production. Site ID: $NETLIFY_SITE_ID"
                     netlify status
                     netlify deploy --dir=build --prod
                     npx playwright test --reporter=html
