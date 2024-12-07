@@ -12,7 +12,7 @@ pipeline {
         stage('AWS') {
             agent {
                 docker 'amazon/aws-cli'
-                args "--entrypoint=''"
+                args '--entrypoint=""'
             }
 
             steps {
