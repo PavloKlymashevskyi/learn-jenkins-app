@@ -37,7 +37,7 @@ pipeline {
                 }
             }
             environment {
-                AWS_S3_BUCKET = 'your-aws-s3-bucket-name'
+                AWS_S3_BUCKET = 'learn-jenkins-20241207155'
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'my-aws', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
@@ -136,7 +136,7 @@ pipeline {
             }
 
             environment {
-                CI_ENVIRONMENT_URL = 'http://learn-jenkins-20241207155.s3-website-us-east-1.amazonaws.com/'
+                CI_ENVIRONMENT_URL = 'http://learn-jenkins-20241207155.s3-website-us-east-1.amazonaws.com'
             }
 
             steps {
