@@ -18,7 +18,6 @@ pipeline {
             }
             steps {
                 sh '''
-                echo "Small Change"
                     ls -la
                     node --version
                     npm --version
@@ -37,11 +36,9 @@ pipeline {
                     args "--entrypoint=''"
                 }
             }
-
             environment {
                 AWS_S3_BUCKET = 'learn-jenkins-20241207155'
             }
-
             steps {
                 withCredentials([usernamePassword(credentialsId: 'my-aws', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
                     sh '''
@@ -51,11 +48,10 @@ pipeline {
                 }
             }
         }
-        
 
         stage('Tests') {
             parallel {
-                stage('Unit Tests') {
+                stage('Unit tests') {
                     agent {
                         docker {
                             image 'node:18-alpine'
@@ -69,7 +65,6 @@ pipeline {
                             npm test
                         '''
                     }
-
                     post {
                         always {
                             junit 'jest-results/junit.xml'
@@ -89,7 +84,7 @@ pipeline {
                         sh '''
                             serve -s build &
                             sleep 10
-                            npx playwright test --reporter=html
+                            npx playwright test  --reporter=html
                         '''
                     }
 
@@ -121,8 +116,7 @@ pipeline {
                     netlify status
                     netlify deploy --dir=build --json > deploy-output.json
                     CI_ENVIRONMENT_URL=$(jq -r '.deploy_url' deploy-output.json)
-
-                    npx playwright test --reporter=html
+                    npx playwright test  --reporter=html
                 '''
             }
 
@@ -152,7 +146,7 @@ pipeline {
                     echo "Deploying to production. Site ID: $NETLIFY_SITE_ID"
                     netlify status
                     netlify deploy --dir=build --prod
-                    npx playwright test --reporter=html
+                    npx playwright test  --reporter=html
                 '''
             }
 
