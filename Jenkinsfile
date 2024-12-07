@@ -136,7 +136,7 @@ pipeline {
             }
 
             environment {
-                CI_ENVIRONMENT_URL = 'https://splendorous-quokka-18c5f7.netlify.app'
+                CI_ENVIRONMENT_URL = 'http://learn-jenkins-20241207155.s3-website-us-east-1.amazonaws.com'
             }
 
             steps {
