@@ -37,7 +37,7 @@ pipeline {
                 }
             }
             environment {
-                AWS_S3_BUCKET = 'learn-jenkins-20241207155'
+                AWS_S3_BUCKET = 'your-aws-s3-bucket-name'
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'my-aws', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
@@ -90,7 +90,7 @@ pipeline {
 
                     post {
                         always {
-                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright Local', reportTitles: '', useWrapperFileDirectly: true])
+                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Local E2E', reportTitles: '', useWrapperFileDirectly: true])
                         }
                     }
                 }
@@ -112,7 +112,7 @@ pipeline {
             steps {
                 sh '''
                     netlify --version
-                    echo "Depolying to staging. Site ID: $NETLIFY_SITE_ID"
+                    echo "Deploying to staging. Site ID: $NETLIFY_SITE_ID"
                     netlify status
                     netlify deploy --dir=build --json > deploy-output.json
                     CI_ENVIRONMENT_URL=$(jq -r '.deploy_url' deploy-output.json)
@@ -136,7 +136,7 @@ pipeline {
             }
 
             environment {
-                CI_ENVIRONMENT_URL = 'http://learn-jenkins-20241207155.s3-website-us-east-1.amazonaws.com'
+                CI_ENVIRONMENT_URL = 'http://learn-jenkins-20241207155.s3-website-us-east-1.amazonaws.com/'
             }
 
             steps {
