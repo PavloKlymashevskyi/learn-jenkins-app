@@ -7,8 +7,8 @@ pipeline {
         AWS_DEFAULT_REGION = 'us-east-1'
         AWS_DOCKER_REGISTRY = '565393053420.dkr.ecr.us-east-1.amazonaws.com'
         AWS_ECS_CLUSTER = 'LearnJenkinsApp-Cluster-Prod'
-        AWS_SERVICE_PROD = 'LearnJenkinsApp-Service-Prod'
-        AWS_TD_PROD = 'LearnJenkinsApp-TaskDefinition-Prod'
+        AWS_ECS_SERVICE_PROD = 'LearnJenkinsApp-Service-Prod'
+        AWS_ECS_TD_PROD = 'LearnJenkinsApp-TaskDefinition-Prod'
     }
 
     stages {
